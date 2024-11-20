@@ -110,3 +110,8 @@ Here you define wether you want your NGINX to act as a web server or a proxy ser
 ![nginx_configuration_file](image-15.png)
 
 ![location_directive_nginx](image-16.png)
+
+
+Here, we redirect all traffic received in port 80 (http) to 443 (https) and we serve content over SSL/TLS (configured):
+
+<img width="896" alt="image" src="https://github.com/user-attachments/assets/19e9fac0-7695-4b0d-9d7e-263910f804bf">
