@@ -22,7 +22,7 @@ When web became popular, we have thousands or millions of requests per website. 
 
 We need a few more servers to handle the load, so we add 10 NGINX webservers..
 
-But now we need sothing that determines where requests from the browser end. Which one of those 10 servers will handle them.
+But now we need something that determines where requests from the browser end. Which one of those 10 servers will handle them.
 
 This is where load balancing comes in.. We can use another NGINX as a load balances that proxies the requests to those 10 servers.
 
