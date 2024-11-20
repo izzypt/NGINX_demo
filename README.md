@@ -124,3 +124,7 @@ On the next image, we configure load balancing to multiple backend servers and w
 On the next one, you can see the caching configuration example:
 
 <img width="1675" alt="image" src="https://github.com/user-attachments/assets/b271aa3a-90e7-414e-8792-222dcbb8ccf9">
+
+You can see the full list of all configuration blocks and directives here:
+
+https://nginx.org/en/docs/
