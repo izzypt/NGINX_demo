@@ -115,3 +115,9 @@ Here you define wether you want your NGINX to act as a web server or a proxy ser
 Here, we redirect all traffic received in port 80 (http) to 443 (https) and we serve content over SSL/TLS (configured):
 
 <img width="896" alt="image" src="https://github.com/user-attachments/assets/19e9fac0-7695-4b0d-9d7e-263910f804bf">
+
+
+On the next image, we configure load balancing to multiple backend servers and within that configuration you can define which load balancing algo to use..
+
+<img width="1117" alt="image" src="https://github.com/user-attachments/assets/87c48ff1-b185-4e0c-80c3-0c0a3784f902">
+
