@@ -121,3 +121,6 @@ On the next image, we configure load balancing to multiple backend servers and w
 
 <img width="1117" alt="image" src="https://github.com/user-attachments/assets/87c48ff1-b185-4e0c-80c3-0c0a3784f902">
 
+On the next one, you can see the caching configuration example:
+
+<img width="1675" alt="image" src="https://github.com/user-attachments/assets/b271aa3a-90e7-414e-8792-222dcbb8ccf9">
