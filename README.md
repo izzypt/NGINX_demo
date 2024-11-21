@@ -136,4 +136,4 @@ https://nginx.org/en/docs/
 <img width="1615" alt="image" src="https://github.com/user-attachments/assets/90b072d2-80c1-48fd-ab54-a766d6e14f6f">
 
 
-
+NGINX ingress controller is used inside the cluster, so unlike the proxy for web servers it is not publicly acessible
