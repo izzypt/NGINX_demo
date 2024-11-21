@@ -136,4 +136,16 @@ https://nginx.org/en/docs/
 <img width="1615" alt="image" src="https://github.com/user-attachments/assets/90b072d2-80c1-48fd-ab54-a766d6e14f6f">
 
 
-NGINX ingress controller is used inside the cluster, so unlike the proxy for web servers it is not publicly acessible
+NGINX ingress controller is used inside the cluster, so unlike the proxy for web servers it is not publicly acessible, so you can't acess the NGINX ingress controller from the browser, it lives inside the cluster.
+
+<img width="1592" alt="image" src="https://github.com/user-attachments/assets/643a5c91-431d-4276-acca-8d1a4fb0aee3">
+
+
+Who gets the request from public ? It's the cloud load balancer. 
+
+This is important because it adds a security layer to those requests. so, the cluster component is never directly exposed to public access.
+
+The ELB (aws load balancer), forwards to the ingress controller within the cluster, which then routes the traffic based on intelligent logic to different applications within the cluster.
+
+<img width="1213" alt="image" src="https://github.com/user-attachments/assets/99f284eb-c89c-4915-96e5-b25dba96111d">
+
