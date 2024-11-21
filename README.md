@@ -18,7 +18,7 @@ NGINX would be this server software that responds to client HTTP requests.
 
 When web became popular, we have thousands or millions of requests per website. Imagine one single server handling millions of requests...
 
-![millions-of-requests](image-1.png)
+![millions-of-requests](images/image-1.png)
 
 We need a few more servers to handle the load, so we add 10 NGINX webservers..
 
@@ -30,7 +30,7 @@ This is where load balancing comes in.. We can use another NGINX as a load balan
 (proxy server = "intermediary server that forwards client requests to other servers")
 
 
-![NGINX_load_balancing](image-2.png)
+![NGINX_load_balancing](images/image-2.png)
 
 The load is distributed based on whichever algorithm was defined on it. Some examples are:
 
@@ -43,13 +43,13 @@ Imagine that a New York Times article comes out and million of people open it. T
 
 - Every time a request landed with one of the web servers, it would assemble the response (put images together, get them from database, add all links, etc..) and it would happen millions of times for each request. 
 
-![caching NGINX](image-3.png)
+![caching NGINX](images/image-3.png)
 
 That seems pretty inneficient. Caching allow us to do the heavy lifting only once (get all the data from db, put the text together, images, etc..) and store the response.
 
-![proxy_cache](image-4.png)
+![proxy_cache](images/image-4.png)
 
-![caching](image-5.png)
+![caching](images/image-5.png)
 
 ### A single entrypoint
 
@@ -60,17 +60,17 @@ That makes those servers a pretty juicy target for hackers, like personal data, 
 
 Imagine you exposed all 100's servers to public access... all those requests would be able to directly hit each of the web servers...
 
-![one_entrypoint](image-6.png)
+![one_entrypoint](images/image-6.png)
 
 We want to reduce the risk by providing only one server that is publicly acessible. We can put all our security efforts into one server instead of 100's.
 
 Having only one entrypoint (the proxy) as publicly acessible reduces the secuirty attack surface tremendously and acts like a shield or security layer.
 
-![proxy_entrypoin](image-7.png)
+![proxy_entrypoin](images/image-7.png)
 
 ### Encrypted communications
 
-![encrypted_ssl](image-9.png)
+![encrypted_ssl](images/image-9.png)
 
 One very important security measure is encrypted communication.
 
@@ -80,36 +80,36 @@ The browser will send encrypted message to the proxy - which means, even if atta
 
 We can configure the proxy to deny any requests that is not encrypted and only accept encrypted requests.
 
-![encrypted_communication](image-10.png)
+![encrypted_communication](images/image-10.png)
 
 ### Compression
 
 Now, imagine NetFlix - which , by the way , uses NGINX on it's backend - has millions of users and millions of requests for videos on it's webservers.
 
-![Netflix_nginx](image-11.png)
+![Netflix_nginx](images/image-11.png)
 
 Millions of requests are sent for a high quality video to NetFlix. Imagine if NGINX proxy server would have to send back the entire high bquality video to millions of users at once (that's a lot of bandwidth - imagine how long it would take) and that's where compressions helps.
 
-![nginx_compression](image-12.png)
+![nginx_compression](images/image-12.png)
 
 NGINX proxy can also BE CONFIGURED TO COMPRESS LARGE IMAGES OR VIDEO FILES TO SAVE BANDWIDTH , BOTH ON THE receiving end and on the server side.
 
 It also support chuncking (segmentation - sending response in chuncks)
 
-![chuncking_nginx](image-13.png)
+![chuncking_nginx](images/image-13.png)
 
 
 # How to setup NGINX
 
 Using NGINX configuration
 
-![nginx.conf](image-14.png)
+![nginx.conf](images/image-14.png)
 
 Here you define wether you want your NGINX to act as a web server or a proxy server by configuring where it should forward the traffic to or if it should handle it itself. 
 
-![nginx_configuration_file](image-15.png)
+![nginx_configuration_file](images/image-15.png)
 
-![location_directive_nginx](image-16.png)
+![location_directive_nginx](images/image-16.png)
 
 
 Here, we redirect all traffic received in port 80 (http) to 443 (https) and we serve content over SSL/TLS (configured):
