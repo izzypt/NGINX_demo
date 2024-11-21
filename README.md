@@ -10,11 +10,11 @@ Back in the day, when the internet was still simple, with less users, the basic 
 
 NGINX would be this server software that responds to client HTTP requests.
 
-![NGINX web server](image.png)
+![NGINX web server](images/image.png)
 
 ### NGINX as a a proxy server.
 
-![nginx_proxy_functionalities](image-8.png)
+![nginx_proxy_functionalities](images/image-8.png)
 
 When web became popular, we have thousands or millions of requests per website. Imagine one single server handling millions of requests...
 
