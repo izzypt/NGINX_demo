@@ -128,3 +128,12 @@ On the next one, you can see the caching configuration example:
 You can see the full list of all configuration blocks and directives here:
 
 https://nginx.org/en/docs/
+
+### NGINX in Kubernetes - NGINX as k8'S ingress controller
+
+<img width="1660" alt="image" src="https://github.com/user-attachments/assets/4ae1444b-0a0f-448c-82fb-aa6cd81c8968">
+
+<img width="1615" alt="image" src="https://github.com/user-attachments/assets/90b072d2-80c1-48fd-ab54-a766d6e14f6f">
+
+
+
