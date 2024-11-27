@@ -149,3 +149,112 @@ The ELB (aws load balancer), forwards to the ingress controller within the clust
 
 <img width="1213" alt="image" src="https://github.com/user-attachments/assets/99f284eb-c89c-4915-96e5-b25dba96111d">
 
+# NGINX configuration file (nginx.conf)
+
+The `nginx.conf` file is the main configuration file for **NGINX**, controlling how it handles requests, serves content, and communicates with clients. Here's a brief overview:
+
+---
+
+### **Structure of `nginx.conf`**
+The file is organized into **directives** and **blocks**, structured hierarchically:
+
+1. **Main Context**: 
+   - Global settings that affect the entire NGINX instance.
+   - Example: Worker processes, logging paths, and file locations.
+   - Example:
+     ```nginx
+     worker_processes 4;
+     error_log /var/log/nginx/error.log;
+     ```
+
+2. **Events Context**:
+   - Handles connection-related settings.
+   - Example:
+     ```nginx
+     events {
+         worker_connections 1024;
+     }
+     ```
+
+3. **HTTP Context**:
+   - Configures web server behavior, including serving HTTP content and reverse proxying.
+   - Contains nested blocks:
+     - **Server Block**: Defines server-specific settings like domains and ports.
+     - **Location Block**: Defines URL-specific settings.
+   - Example:
+     ```nginx
+     http {
+         include /etc/nginx/mime.types;
+         server {
+             listen 80;
+             server_name example.com;
+
+             location / {
+                 root /var/www/html;
+                 index index.html;
+             }
+         }
+     }
+     ```
+
+4. **Stream Context** (optional):
+   - Handles TCP/UDP proxying (for non-HTTP traffic).
+   - Example:
+     ```nginx
+     stream {
+         server {
+             listen 12345;
+             proxy_pass backend:12345;
+         }
+     }
+     ```
+
+---
+
+### **Key Directives**
+1. **Worker Processes**:
+   - `worker_processes`: Number of worker processes for handling requests.
+
+2. **Server and Port**:
+   - `server_name`: Defines the domain(s) the server responds to.
+   - `listen`: Specifies the port (e.g., `80` for HTTP, `443` for HTTPS).
+
+3. **Root and Index**:
+   - `root`: Specifies the document root.
+   - `index`: Defines the default file (e.g., `index.html`) for requests.
+
+4. **Reverse Proxy**:
+   - `proxy_pass`: Forwards client requests to another server (backend).
+   - Example:
+     ```nginx
+     location /api/ {
+         proxy_pass http://backend_server;
+     }
+     ```
+
+5. **Logging**:
+   - `access_log`: Logs access requests.
+   - `error_log`: Logs errors.
+
+---
+
+### **What’s Most Important About `nginx.conf`**
+1. **Modularity**:
+   - It can include other configuration files, typically stored in `/etc/nginx/conf.d/` or `/etc/nginx/sites-enabled/`.
+
+2. **Flexibility**:
+   - Can handle multiple domains (virtual hosts) and URL-specific rules.
+
+3. **Optimization**:
+   - Configure caching, gzip compression, and worker connections for performance.
+
+4. **Security**:
+   - Supports HTTPS, rate limiting, and access control.
+
+5. **Error Handling**:
+   - Custom error pages can be defined for specific status codes.
+
+By understanding and correctly configuring `nginx.conf`, you can tailor NGINX to meet the needs of your application efficiently and securely.
+
+![image](https://github.com/user-attachments/assets/f7b292a6-b699-4304-8ac8-05c5242c63ee)
+
