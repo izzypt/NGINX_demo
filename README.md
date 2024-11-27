@@ -266,3 +266,4 @@ By understanding and correctly configuring `nginx.conf`, you can tailor NGINX to
 
 ![image](https://github.com/user-attachments/assets/82b91341-16b0-4e5b-9997-35c3aa8fe112)
 
+![image](https://github.com/user-attachments/assets/8ae9c98e-f3ec-406b-8e09-23919b2c2937)
