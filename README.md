@@ -292,5 +292,9 @@ Ways of generating certificate:
   - Issued and authenticated by a trsuted certificate authority.
   - CA verifies the identity of the organization requesting the certificate.
 
+![image](https://github.com/user-attachments/assets/98537ab8-68b5-4298-929c-85f0e312c575)
 
 
+![image](https://github.com/user-attachments/assets/2536810a-55dc-4542-b3b6-9ceac47ebcad)
+
+![image](https://github.com/user-attachments/assets/ae088b2f-2655-4201-a949-6c7e7b708eb5)
