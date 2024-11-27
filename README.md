@@ -268,6 +268,29 @@ By understanding and correctly configuring `nginx.conf`, you can tailor NGINX to
 
 ![image](https://github.com/user-attachments/assets/8ae9c98e-f3ec-406b-8e09-23919b2c2937)
 
+![image](https://github.com/user-attachments/assets/93a74c95-d33e-485f-9921-8026e8611c15)
+
 ![image](https://github.com/user-attachments/assets/ee46bae1-9f99-4593-93a9-d623be3ca94d)
 
-![image](https://github.com/user-attachments/assets/93a74c95-d33e-485f-9921-8026e8611c15)
+
+
+# Enabling SSL/TLS encryption
+
+1- Obtain an SSL/TLS certificate
+
+![image](https://github.com/user-attachments/assets/b3222492-b512-44ff-a935-98bf80e96fc5)
+
+The certificate validates the server and contains a punlic key that client can use to talk to the server.
+
+Ways of generating certificate:
+
+1 - A self-signed certificate
+  - Generated and signed by the server itself.
+  - Useful for testing or internal sites, but not recommended for production.
+
+2 - CA signed certificate
+  - Issued and authenticated by a trsuted certificate authority.
+  - CA verifies the identity of the organization requesting the certificate.
+
+
+
