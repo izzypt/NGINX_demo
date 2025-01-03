@@ -1,5 +1,9 @@
 # NGINX
 
+Other cool articles:
+
+- https://medium.com/@ksaquib/nginx-zero-to-hero-your-ultimate-guide-from-beginner-to-advanced-mastery-57e2dad6a77a
+
 ### NGINX as a webserver.
 
 Back in the day, when the internet was still simple, with less users, the basic use case was:
