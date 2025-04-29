@@ -1,5 +1,113 @@
 # NGINX
 
+# commands
+
+- [nginx -T](#nginx-t) - tests your Nginx configuration for errors and then shows you the complete, merged configuration it would actually use - a "configuration check and preview" command .
+
+
+<a id="nginx-t"></a>
+### nginx -T
+
+`nginx -T` performs two key actions:
+
+1.  **Configuration Syntax and Logic Validation:** It parses your main `nginx.conf` and all included configuration files, checking for syntactical correctness (e.g., proper use of directives, semicolons, block structures) and basic logical consistency. This includes verifying file paths in directives like `include`, `root`, `access_log`, and `error_log`. If any errors are detected during this parsing phase, Nginx will output specific error messages indicating the file and line number of the issue, and the command will exit with a non-zero status code.
+
+2.  **Full Configuration Tree Output:** If the initial validation passes, `nginx -T` proceeds to process the entire configuration. This involves resolving `include` directives, applying default values to unspecified parameters, and effectively merging all the configuration snippets into a single, coherent configuration structure that Nginx would load into memory. The command then outputs this complete, flattened configuration to the standard output. This output reflects the final state of all directives and their values as they would be applied by the Nginx worker processes.
+
+Essentially, `nginx -T` simulates the initial stages of Nginx startup, specifically the configuration loading and parsing phase. It allows administrators to inspect the final, consolidated configuration without actually starting or reloading the Nginx service, thus preventing potential service disruptions due to configuration errors. The output is a direct representation of Nginx's internal configuration tree.
+
+**Scenario 1: Valid Configuration**
+
+Let's say you have a basic `nginx.conf` and a site configuration in `sites-enabled/mysite.conf`. If both files have correct syntax, running `nginx -T` might produce output like this (the actual configuration will be much longer):
+
+```
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+# configuration file /etc/nginx/nginx.conf:
+user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+include /etc/nginx/modules-enabled/*.conf;
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+    access_log /var/log/nginx/access.log combined;
+    error_log /var/log/nginx/error.log;
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    keepalive_timeout 65;
+    types_hash_max_size 2048;
+    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/sites-enabled/*; # Here's where mysite.conf gets included
+}
+
+# configuration file /etc/nginx/sites-enabled/mysite.conf:
+server {
+    listen 80;
+    server_name example.com www.example.com;
+    root /var/www/example.com;
+    index index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+```
+
+The key here is the initial "syntax is ok" and "test is successful" messages, followed by the complete, merged configuration. Notice how the contents of `/etc/nginx/sites-enabled/mysite.conf` are included within the `http` block in the final output.
+
+**Scenario 2: Syntax Error**
+
+Imagine you accidentally forget a semicolon in your `sites-enabled/mysite.conf`:
+
+```nginx
+server {
+    listen 80
+    server_name example.com www.example.com;
+    root /var/www/example.com;
+    index index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+```
+
+Running `nginx -T` would now output an error message:
+
+```
+nginx: [emerg] directive "listen" has no arguments in /etc/nginx/sites-enabled/mysite.conf:2
+nginx: configuration file /etc/nginx/nginx.conf test failed
+```
+
+This clearly points out the error: the `listen` directive on line 2 of `/etc/nginx/sites-enabled/mysite.conf` is missing its port number argument and the required semicolon. The "test failed" message indicates that Nginx would refuse to load this configuration.
+
+**Scenario 3: Invalid File Path**
+
+Suppose you have a typo in the `access_log` directive in your main `nginx.conf`:
+
+```nginx
+http {
+    # ... other directives ...
+    access_log /var/log/nginx/accsss.log combined; # Typo here
+    # ...
+}
+```
+
+Running `nginx -T` might still show "syntax is ok" because the directive itself is syntactically correct. However, when Nginx tries to apply this configuration, it might encounter issues. While `-T` primarily focuses on syntax and basic logic, it might not always catch all runtime errors related to invalid paths. However, it's still valuable for catching the more obvious configuration mistakes.
+
+**Key Takeaway from Examples:**
+
+* `nginx -T` helps you see the final, combined configuration.
+* It's excellent for catching syntax errors that would prevent Nginx from starting or reloading.
+* The error messages are usually quite informative, pointing to the specific file and line number with the problem.
+
+By using `nginx -T` regularly, especially after making configuration changes, you can significantly reduce the risk of unexpected downtime and make debugging much easier.
+
+---
+
 Other cool articles:
 
 - https://medium.com/@ksaquib/nginx-zero-to-hero-your-ultimate-guide-from-beginner-to-advanced-mastery-57e2dad6a77a
